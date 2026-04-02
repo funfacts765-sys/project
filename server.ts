@@ -13,13 +13,13 @@ const __dirname = path.dirname(__filename);
 
 async function startServer() {
   const app = express();
-  // FIXED: Vercel/Render will provide the port automatically
+  // Vercel uses its own port, so we use process.env.PORT
   const PORT = process.env.PORT || 3000;
 
   app.use(express.json());
   app.use(cookieParser());
 
-  // --- GITHUB OAUTH ROUTES (ALL FEATURES PRESERVED) ---
+  // GitHub OAuth Routes (All features preserved)
   app.get('/api/auth/github/url', (req, res) => {
     const clientId = process.env.GITHUB_CLIENT_ID;
     if (!clientId) return res.status(500).json({ error: 'GITHUB_CLIENT_ID not configured' });
@@ -57,7 +57,6 @@ async function startServer() {
         avatar_url: userResponse.data.avatar_url,
       };
 
-      // FIXED: Production-ready cookies
       res.cookie('github_user', JSON.stringify(githubUser), {
         httpOnly: true,
         secure: true, 
@@ -86,7 +85,6 @@ async function startServer() {
     res.json({ success: true });
   });
 
-  // --- VITE / STATIC SERVING ---
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({ server: { middlewareMode: true }, appType: 'spa' });
     app.use(vite.middlewares);
@@ -100,5 +98,4 @@ async function startServer() {
 }
 
 startServer();
-// Export for Vercel
 export default startServer;
