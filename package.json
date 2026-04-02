@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "vite build && tsc server.ts --outDir dist --module esnext --moduleResolution node --allowSyntheticDefaultImports true --target es2022",
+    "build": "vite build && tsc server.ts --outDir dist --module esnext --moduleResolution node --allowSyntheticDefaultImports true --target es2022 --skipLibCheck true",
     "start": "node dist/server.js",
     "lint": "tsc --noEmit"
   },
