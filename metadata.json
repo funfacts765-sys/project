@@ -1,0 +1,5 @@
+{
+  "name": "EduHub - All-in-One Learning Portal",
+  "description": "A comprehensive education platform featuring course search (YouTube, Udemy, Coursera), a LeetCode-style study tracker, notes, and an AI-powered doubt-clearing assistant.",
+  "requestFramePermissions": []
+}
